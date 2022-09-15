@@ -1,9 +1,11 @@
+/// headers padrão
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
 #include <pthread.h>
 #include <stdio_ext.h>
+/// headers criados
 #include "ajustar_tempo.h"
 #include "contar_tempo.h"
 #include "definir_alarme.h"
@@ -38,7 +40,7 @@ int main(void) {
 
     pthread_create(&thread_horario, NULL, contar_tempo, &(h->dados_tempo));
 
-    do {
+    while(1) {
 
         menu();
         scanf("%hu", &op);
@@ -110,7 +112,7 @@ int main(void) {
 
                 }
 
-                printf("Alarme %sdefinido para tocar às %s:00\n", flag_alarme ? "já " : "",
+                printf("Alarme %sdefinido para tocar às %s:00\n", (flag_alarme) ? "já " : "",
                     a->str);
                 flag_alarme = true;
 
@@ -138,8 +140,9 @@ int main(void) {
         getchar();
         __fpurge(stdin);
 
-    } while(op != 0);
+    }
 
+    /// return nunca é atingido
     return EXIT_SUCCESS;
 
 }
